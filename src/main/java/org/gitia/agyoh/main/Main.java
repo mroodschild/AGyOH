@@ -40,8 +40,6 @@ public class Main {
         double[][] high_data = {{20, 20, 30, 3, -1}};
         SimpleMatrix low = new SimpleMatrix(low_data);
         SimpleMatrix high = new SimpleMatrix(high_data);
-        low.print();
-        high.print();
         
         GeneticAlgorithm ga = new GeneticAlgorithm(10, f, low, high, 0.1);
         ga.train();
