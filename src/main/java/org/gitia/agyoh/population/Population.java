@@ -63,9 +63,12 @@ public class Population {
             System.err.println("Error: " + error);
             System.exit(0);
         }
+        //filas cantidad de población, columnas características de cada población
         SimpleMatrix population = new SimpleMatrix(pop, lowBound.numCols());
         for (int i = 0; i < lowBound.numCols(); i++) {
+            //generamos característica por característica entre el mínimo y el máximo.
             SimpleMatrix v = SimpleMatrix.random_DDRM(pop, 1, lowBound.get(i), highBound.get(i), r);
+            //insertamos los valores correspondientes en la columna actual
             population.setColumn(i, 0, v.getDDRM().getData());
         }
         return population;
