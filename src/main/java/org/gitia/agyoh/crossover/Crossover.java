@@ -27,6 +27,7 @@ package org.gitia.agyoh.crossover;
  *
  * @author Matías Roodschild <mroodschild@gmail.com>
  */
-public class CrossOver {
+public interface Crossover {
+    
     
 }
