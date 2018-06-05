@@ -27,6 +27,8 @@ import java.util.List;
 import org.ejml.simple.SimpleMatrix;
 import org.gitia.agyoh.fitness.Fitness;
 import org.gitia.agyoh.population.Population;
+import org.gitia.agyoh.selector.RouletteWheelSelection;
+import org.gitia.agyoh.selector.Selector;
 
 /**
  *
@@ -34,14 +36,17 @@ import org.gitia.agyoh.population.Population;
  */
 public class GeneticAlgorithm {
 
+    //hyperparameters
     int population;
+    int generation = 1;
+    double mutation;
     SimpleMatrix gens;
     List<SimpleMatrix> pop;
     Fitness function;
     SimpleMatrix lowBound;
     SimpleMatrix highBound;
-    double mutation;
-
+    Selector selector;
+    
     public GeneticAlgorithm() {
     }
 
@@ -51,16 +56,21 @@ public class GeneticAlgorithm {
         this.lowBound = lowBound;
         this.highBound = highBound;
         this.mutation = mutation;
+        selector = new RouletteWheelSelection();
     }
 
     public SimpleMatrix train() {
         //initial population
         gens = Population.generatePopulation(population, lowBound, highBound);
-        for (int i = 0; i < 10; i++) {
+        SimpleMatrix evaluation;
+        for (int i = 0; i < generation; i++) {
 
             //evaluation
-            function.eval(gens);
+            evaluation = function.eval(gens);
+            evaluation.print();
             //Selection
+            selector.setFitness(evaluation);
+            int[] idx = selector.getSelection(10);
             //crossover
             //mutation
             //is the end?
