@@ -30,11 +30,10 @@ import org.ejml.simple.SimpleMatrix;
  *
  * @author Matías Roodschild <mroodschild@gmail.com>
  */
-public class Quadratic implements Fitness{
+public class FlappyBird implements Fitness{
 
     /**
-     * this function compute -Sum(x^2) of each row and it's zero when all 
-     * parameters are close to zero
+     * this function compute Sum(x^2) of each row
      * 
      * @param gen is a matrix [pop x n], where n is the number of features
      * @return a col matrix [pop x 1] with the evaluation of each gen
@@ -43,7 +42,7 @@ public class Quadratic implements Fitness{
     public SimpleMatrix eval(SimpleMatrix gen) {
         SimpleMatrix eval = new SimpleMatrix(gen.numRows(), 1);
         CommonOps_DDRM.sumRows(gen.elementPower(2).getDDRM(), eval.getDDRM());
-        return eval.negative();
+        return eval;
     }
     
 }
